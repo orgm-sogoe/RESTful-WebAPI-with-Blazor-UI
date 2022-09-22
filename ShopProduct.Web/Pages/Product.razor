@@ -1,0 +1,25 @@
+﻿@page "/product/{Id:int}"
+@inherits ProductBase
+
+@if(Product == null && ErrorMessage == null)
+{
+    <Loading/>
+}
+else if(ErrorMessage != null)
+{
+    <h3 class="text-black">@ErrorMessage</h3>
+}
+else
+{
+    <h2 class="mb-3">Item Details</h2>
+    <div class="col-md-6">
+        <h4 class="text-success">@Product.Name</h4>
+        <h5 class="text-body">@Product.Description</h5>
+        <h5 class="text-danger font-monospace">Price: @Product.Price.ToString("C")</h5>
+        <h6>Items in stock: @Product.Quantity</h6>
+    </div>
+    <br />
+
+     <a href="deleted" class="alert-danger btn btn-danger" @onclick="Delete">Delete</a>
+     <a href="/" class="alert-success btn btn-success">Back</a>
+}

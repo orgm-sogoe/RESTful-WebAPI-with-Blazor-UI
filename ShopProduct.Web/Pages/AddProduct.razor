@@ -1,0 +1,32 @@
+﻿@page "/addproduct"
+@inherits AddProductBase
+
+
+<PageTitle>Add To Inventory</PageTitle>
+
+<h3 class="text-center text-black">Add New Product</h3>
+<br />
+<EditForm Model="product" OnSubmit="HandleValidSubmit">
+    <div>
+        <label for="name">Name</label>
+        <InputText id="name" @bind-Value="product.Name" class="form-control"></InputText>
+    </div>
+    <br />
+    <div>
+        <label for="description">Description</label>
+        <InputText id="description" @bind-Value="product.Description" class="form-control"></InputText>
+    </div>
+    <br />
+    <div>
+        <label for="price">Price</label>
+        <InputNumber id="price" @bind-Value="product.Price" class="form-control"></InputNumber>
+    </div>
+    <br />
+    <div>
+        <label for="quantity">Quantity</label>
+        <InputNumber id="quantity" @bind-Value="product.Quantity" class="form-control"></InputNumber>
+    </div>
+    <br />
+    <br />
+    <button class="bg-info border-light btn btn-success" type="submit">Add</button>  
+</EditForm>

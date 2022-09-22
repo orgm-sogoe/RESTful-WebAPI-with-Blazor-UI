@@ -1,0 +1,50 @@
+﻿@page "/superheroes"
+@inject ISuperHeroService SuperHeroService
+@inject NavigationManager NavigationManager
+
+<PageTitle>FootWears</PageTitle>
+
+<h3>Trending Picks</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>        
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in SuperHeroService.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Quantity</td>
+                <td>
+                    <button class="btn btn-primary" @onclick="(() => ShowHero(product.Id))"><i class="oi oi-pencil"></i></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<button class="btn btn-primary" @onclick="CreateNewProduct">Create New Entry</button>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await SuperHeroService.GetProducts();
+    }
+
+    void ShowHero(int id)
+    {
+        NavigationManager.NavigateTo($"products/{id}");
+    }
+
+    void CreateNewProduct()
+    {
+        NavigationManager.NavigateTo("/products");
+    }
+}
