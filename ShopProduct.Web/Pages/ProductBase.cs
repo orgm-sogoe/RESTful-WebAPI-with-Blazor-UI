@@ -28,7 +28,7 @@ namespace ShopProduct.Web.Pages
             await ProductService.DeleteProduct(Id);
         }
 
-        public async Task ToUpdate(int Id)
+        public void ToUpdate(int Id)
         {
             NavigationManager.NavigateTo($"updateproduct/{Id}", true);
         }
