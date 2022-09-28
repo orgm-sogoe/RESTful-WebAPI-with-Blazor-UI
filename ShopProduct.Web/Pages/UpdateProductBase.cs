@@ -29,7 +29,6 @@ namespace ShopProduct.Web.Pages
         {
             var updatedProduct = new ProductUpdateDto 
             { 
-              Id= product.Id, 
               Name= product.Name,
               Description= product.Description,
               Price= product.Price,
