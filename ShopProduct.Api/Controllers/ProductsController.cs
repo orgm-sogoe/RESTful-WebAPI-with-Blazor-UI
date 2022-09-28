@@ -46,7 +46,6 @@ namespace ShopProduct.Api.Controllers
             
         }
 
-        //api/products/int
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductReadDto>> GetProduct(int id)
         {

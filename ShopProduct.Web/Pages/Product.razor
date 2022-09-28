@@ -21,5 +21,8 @@ else
     <br />
 
      <a href="deleted" class="alert-danger btn btn-danger" @onclick="Delete">Delete</a>
-     <a href="/" class="alert-success btn btn-success">Back</a>
+     <button class="alert-success btn btn-success" @onclick="() => ToUpdate(Product.Id)">Update</button>
+     <br />
+     <br />
+     <a href="/" class="alert-secondary btn btn-light">Back</a>
 }

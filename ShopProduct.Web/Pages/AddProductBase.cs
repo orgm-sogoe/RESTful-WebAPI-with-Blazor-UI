@@ -18,15 +18,8 @@ namespace ShopProduct.Web.Pages
 
         public async void HandleValidSubmit()
         {
-            try
-            {
-                await ProductService.AddProduct(product);
-                NavigationManager.NavigateTo("/", true);
-            }
-            catch (Exception ex)
-            {
-                ErrorMessage = ex.Message;
-            }
+            await ProductService.AddProduct(product);
+            NavigationManager.NavigateTo("/", true);
         }
     }
 }

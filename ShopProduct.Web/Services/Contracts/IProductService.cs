@@ -7,7 +7,7 @@ namespace ShopProduct.Web.Services.Contracts
         Task<IEnumerable<ProductReadDto>> GetProducts();
         Task<ProductReadDto> GetProduct(int id);
         Task AddProduct(ProductAddDto product);  
-        Task UpdateProduct(ProductUpdateDto product);
+        Task UpdateProduct(int id, ProductUpdateDto product);
         Task DeleteProduct(int id);
     }
 }

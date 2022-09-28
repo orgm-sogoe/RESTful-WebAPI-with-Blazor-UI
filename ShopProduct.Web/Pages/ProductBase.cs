@@ -9,7 +9,10 @@ namespace ShopProduct.Web.Pages
        
         [Parameter]
         public int Id { get; set; }
-       
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         [Inject]
         public IProductService ProductService { get; set; }
         public ProductReadDto Product { get; set; }
@@ -17,28 +20,17 @@ namespace ShopProduct.Web.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            try
-            {
-                Product = await ProductService.GetProduct(Id);
-            }
-            catch (Exception ex)
-            {
-
-                ErrorMessage = ex.Message;
-            }         
+           Product = await ProductService.GetProduct(Id);   
         }
 
         public async Task Delete()
         {
-            try
-            {
-                await ProductService.DeleteProduct(Id);               
-            }
-            catch (Exception ex)
-            {
+            await ProductService.DeleteProduct(Id);
+        }
 
-                ErrorMessage = ex.Message;
-            }
+        public async Task ToUpdate(int Id)
+        {
+            NavigationManager.NavigateTo($"updateproduct/{Id}", true);
         }
     }
 }

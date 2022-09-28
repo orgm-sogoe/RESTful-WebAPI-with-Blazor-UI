@@ -1,0 +1,41 @@
+﻿@page "/updateproduct/{Id:int}"
+@inherits UpdateProductBase
+
+<PageTitle>Update Inventory</PageTitle>
+
+@if(ToUpdate!=null)
+{
+    <h3 class="text-center text-black">Update A Product</h3>
+    <br />
+    <EditForm Model="ToUpdate">
+        <div>
+            <label for="name">Name</label>
+            <InputText id="name" @bind-Value="ToUpdate.Name" class="form-control"></InputText>
+        </div>
+        <br />
+        <div>
+            <label for="description">Description</label>
+            <InputText id="description" @bind-Value="ToUpdate.Description" class="form-control"></InputText>
+        </div>
+        <br />
+        <div>
+            <label for="price">Price</label>
+            <InputNumber id="price" @bind-Value="ToUpdate.Price" class="form-control"></InputNumber>
+        </div>
+        <br />
+        <div>
+            <label for="quantity">Quantity</label>
+            <InputNumber id="quantity" @bind-Value="ToUpdate.Quantity" class="form-control"></InputNumber>
+        </div>
+        <br />
+        <br />
+        <button class="bg-primary border-primary btn btn-primary" @onclick="()=>HandleValidSubmit(ToUpdate)">Update</button>
+        <a href="/" class="bg-secondary border-secondary btn btn-secondary">Cancel</a> 
+    </EditForm>
+
+}else{
+    <div>Loading...</div>
+}
+
+
+

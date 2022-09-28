@@ -21,92 +21,29 @@ namespace ShopProduct.Web.Services
 
         public async Task<IEnumerable<ProductReadDto>> GetProducts()
         {
-            try
-            {
-                var products = await _httpClient.GetAsync("api/products");
-                if(products.IsSuccessStatusCode)
-                {
-                    if(products.StatusCode == HttpStatusCode.NoContent)
-                    {
-                        return Enumerable.Empty<ProductReadDto>();
-                    }
-                    return await products.Content.ReadFromJsonAsync<IEnumerable<ProductReadDto>>();
-                }
-                else
-                {
-                    var message = await products.Content.ReadAsStringAsync();
-                    throw new Exception(message);
-                }
-             
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            var products = await _httpClient.GetAsync("api/products");
+            return await products.Content.ReadFromJsonAsync<IEnumerable<ProductReadDto>>();
         }
 
         public async Task<ProductReadDto> GetProduct(int id)
         {
-            try
-            {
-                var product = await _httpClient.GetAsync($"api/products/{id}");
-                if (product.IsSuccessStatusCode)
-                {
-                    if(product.StatusCode == HttpStatusCode.NoContent)
-                    {
-                        return default(ProductReadDto);
-                    }
-                    return await product.Content.ReadFromJsonAsync<ProductReadDto>();
-                }
-                else
-                {
-                    var message = await product.Content.ReadAsStringAsync();
-                    throw new Exception(message);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            var product = await _httpClient.GetAsync($"api/products/{id}");
+            return await product.Content.ReadFromJsonAsync<ProductReadDto>();
         }
 
         public async Task AddProduct(ProductAddDto product)
         {
             var result = await _httpClient.PostAsJsonAsync("api/products", product);
-            if (!result.IsSuccessStatusCode)
-            {
-                var message = result.ReasonPhrase;
-                Console.WriteLine($"There was an error! {message}");
-            }
         }
 
         public async Task DeleteProduct(int id)
-        {
-            try
-            {
-                var delete = await _httpClient.DeleteAsync($"api/products/{id}");
-                if (delete.IsSuccessStatusCode)
-                {
-                    await delete.Content.ReadFromJsonAsync<ProductReadDto>();
-                }
-                else
-                {
-                    var message = await delete.Content.ReadAsStringAsync();
-                    throw new Exception(message);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+        {        
+           var delete = await _httpClient.DeleteAsync($"api/products/{id}");              
         }
 
-        public Task UpdateProduct(ProductUpdateDto product)
+        public async Task UpdateProduct(int id, ProductUpdateDto product)
         {
-            throw new NotImplementedException();
+            var delete = await _httpClient.PutAsJsonAsync($"api/products/{id}", product);
         }
     }
 }
