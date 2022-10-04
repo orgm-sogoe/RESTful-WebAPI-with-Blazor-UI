@@ -41,23 +41,17 @@ namespace ShopProduct.Api.Repositories
 
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-            var products = new List<Product>();
-
-            if(products.Count < 0)
+            var products = await _context.Products.ToListAsync();
+            if(products.Count < 1)
             {
-                throw new ArgumentNullException(nameof(products));
+                return products.DefaultIfEmpty();
             }
-            return await _context.Products.ToListAsync();
+            return products;
         }
 
         public async Task<Product> GetProductAsync(int id)
         {
             var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
-
-            if(product == null)
-            {
-                throw new ArgumentNullException(nameof(product));
-            }
             return product;
         }
 
